@@ -1,0 +1,25 @@
+model Project {
+  id             String           @id @default(cuid())
+
+  name           String
+  description    String?
+
+  clientName     String?
+
+  platform       String         @default("FIVERR")
+
+  orderLink      String?
+
+  status         String    @default("ACTIVE")
+
+  createdById    String
+  createdBy      User             @relation(fields: [createdById], references: [id])
+
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  // Relations
+  messages       Message[]
+
+  @@map("projects")
+}
